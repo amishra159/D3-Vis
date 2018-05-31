@@ -1,78 +1,80 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <title>D3</title>
-    <script src="http://d3js.org/d3.v4.min.js">          <!-- It is an source for open Source D3 library which contain all the necessary files-->
+    <script src="http://d3js.org/d3.v4.min.js">     /*It is an source for open Source D3 library which contain all the necessary files*/
 	</script>
-	
-	<link rel="stylesheet" type="text/css" href="mystyle.css"><!-- Refers the External Style Sheet-->
+
+	<link rel="stylesheet" type="text/css" href="mystyle.css">    
 		
 </head>
 <body>
-	            
-    <svg width="700" height="600"></svg>             <!-- Sets the height and Width for the SVG container-->
+	           
+    <svg width="700" height="600"></svg>            
     <script>
-	  
-        var svg = d3.select("svg"),                     <!-- Selects The SVG Container-->
-            width = svg.attr("width"),                  <!-- Assign the Width to the container-->
-            height = svg.attr("height"),               <!--Assigns the height to the SVG container-->
-            radius = Math.min(width, height) / 3;      <!--calculating the radius for the pie Chart-->
+	 
+        var svg = d3.select("svg"),                    /* Selects The SVG Container*/
+            width = svg.attr("width"),                  /* Assign the Width to the container*/
+            height = svg.attr("height"),               /*Assigns the height to the SVG container*/
+            radius = Math.min(width, height) / 3;      /*calculating the radius for the pie Chart*/
         
-        var g = svg.append("g")                               <!-- Adding the group for different SVG elements to come together-->
-                   .attr("transform", "translate(300,300)");  <!-- Adding the transformations to the group in X and Y axis-->  
+        var g = svg.append("g")                               /*Adding the group for different SVG elements to come together*/
+                   .attr("transform", "translate(300,300)");  /*Adding the transformations to the group in X and Y axis*/  
 
-       var color = d3.scaleOrdinal(["red","green","blue","orange","yellow","grey"]);    <!---Sets the range of Color we want in the Pie Chart-->
+       var color = d3.scaleOrdinal(["red","green","blue","orange","yellow","grey"]);    /*Sets the range of Color we want in the Pie Chart*/
 	                  
 					  
 		
 
-        var pie = d3.pie()         <!--Creates the Layout For the Pie Chart-->
+        var pie = d3.pie()         /*Creates the Layout For the Pie Chart*/
 		.value(function(d) {         
-                return d.MPI;       <!-- The pie chart contains the value of the MPI from tsv file and create the layout-->
+                return d.MPI;       /*The pie chart contains the value of the MPI from tsv file and create the layout*/
             });
 
-        var path = d3.arc()                    <!-- Creates the Layout of an Arc-->
-                     .outerRadius(radius)       <!--Sets An Outer Radius Of the Arc-->
-                     .innerRadius(0);           <!-- Sets an inner Radius of an Arc and it is assigned as 0 so that we can get an shape of an Pie Chart-->
+        var path = d3.arc()                   /*Creates the Layout of an Arc*/
+                     .outerRadius(radius)       /*Sets An Outer Radius Of the Arc*/
+                     .innerRadius(0);           /*Sets an inner Radius of an Arc and it is assigned as 0 so that we can get an shape of an Pie Chart*/
  					 
 				
 					 
 					  
-	d3.tsv("cg.2.tsv", function(data) {    <!-- To get Data from external file we add cg.2.tsv and calls an function where we pass the data from the file-->
+	d3.tsv("cg.2.tsv", function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
+	                                          function where we pass the data from the file*/
 					
-            var arc = g.selectAll(".arc")       <!-- selects all the Arc and creates an array  of Object-->
-                       .data(pie(data))          <!-- the function pie(data) takes the data from the file and creates an object of that data as an Array-->
-                       .enter().append("g")     <!--If the data elements are more than the DOM elements we call the enter to update the data --> 
+            var arc = g.selectAll(".arc")       /* selects all the Arc and creates an array  of Object*/
+                       .data(pie(data))          /* the function pie(data) takes the data from the file and creates an object of that data as an Array*/
+                       .enter().append("g")     /*If the data elements are more than the DOM elements we call the enter to update the data */
                        .attr("class", "arc");
           
 		   
-            arc.append("path")                      <!-- Adds the Path for the arc-->
+            arc.append("path")                      /* Adds the Path for the arc*/
 			
-               .attr("d", path)                      <!-- adds the data to the path-->
-			   .attr("fill", function(d,i) { return color(i); });    <!--the path is filled with the color by the data being pass to the color function and each data correspinds to different color-->
+               .attr("d", path)                      /*adds the data to the path*/
+			   .attr("fill", function(d,i) { return color(i); });   /*the path is filled with the color by the data being pass
+			                                                        to the color function and each data correspinds to different color*/
 		
 		
 		
 		
-            arc.append("text")                      <!-- Adds the Label in the Arc-->
+            arc.append("text")                      /*Adds the Label in the Arc*/
                .attr("transform", function(d) {       
-			   var c=path.centroid(d);                <!-- makes the Label appears to the center of the pie chart-->
-       return "translate(" + c[0]*2.3 +"," + c[1]*2.3  + ")rotate(" + angle(d)+")";  <!-- for making the label appears outside the Pie Chart-->
+			   var c=path.centroid(d);                /*makes the Label appears to the center of the pie chart*/
+       return "translate(" + c[0]*2.3 +"," + c[1]*2.3  + ")rotate(" + angle(d)+")";  /*for making the label appears outside the Pie Chart*/
 
       })
-				.attr("text-anchor","middle")      <!-- The label will be marked to the center of the origin-->
-				.attr("font-size","1em")            <!-- sets the font size of the Label-->
-				.attr("y",function(d,i){return d.i;})     <!-- transforms the label in the Y direction-->
-			     .attr("fill","black")                        <!-- sets the color of the label-->
+				.attr("text-anchor","middle")      /*The label will be marked to the center of the origin*/
+				.attr("font-size","1em")            /*sets the font size of the Label*/
+				.attr("y",function(d,i){return d.i;})    /* transforms the label in the Y direction*/
+			     .attr("fill","black")                      /* sets the color of the label*/
 			         
-               .text(function(d,i) { return  d.data.Call + "(" + d.data.Site + ")";}); <!-- For adding the Text in the Pie Chart-->
+               .text(function(d,i) { return  d.data.Call + "(" + d.data.Site + ")";}); /*For adding the Text in the Pie Chart*/
 			  
 	
 			   
 			  
-			 function angle(d) {                                 <!-- Rotating the Label to certain Angle-->
-      var a = (d.startAngle + d.endAngle) * 90 / Math.PI - 90;    <!-- A pie chart contains the start and the end angle as an object-->
-      return a > 90 ? a - 180 : a;                              <!-- rotates the Label pointing to the center of the origin-->
+			 function angle(d) {                                 /*Rotating the Label to certain Angle*/
+      var a = (d.startAngle + d.endAngle) * 90 / Math.PI - 90;    /*A pie chart contains the start and the end angle as an object*/
+      return a > 90 ? a - 180 : a;                                 /* rotates the Label pointing to the center of the origin*/
     };		   
 
 });
