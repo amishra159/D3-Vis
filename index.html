@@ -55,14 +55,20 @@
      </style>
 </head>
 <body>
-
+               <script>
+function openFileOption()
+{
+document.getElementById("file1").click();
+}
+</script>
                 <!--for adding list in the page-->
 
 <ul>
    <li><a>File</a>        <!-- Adding File option-->
 	<ul>                            <!-- Adding the sub menu for File Option-->
 	<li><a>New</a></li>               <!-- adds the New sub option-->
-	<li><a href="pie.html" target="_parent">Open</a></li>   <!-- On clicking the open Functionality the page gets targeted  to the new file.-->
+	<li><input type="file" id="file1" style="display:none" multiple>
+<a href="pie.html" onclick="openFileOption();return;">Open</a></li>   <!-- On clicking the open Functionality the page gets targeted  to the new file.-->
 	<li><a>Save</a></li>     <!-- adds the Save sub option-->
 	<li><a>Close</a></li>    <!-- adds the Close sub option-->
 	</ul>
