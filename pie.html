@@ -2,15 +2,17 @@
 <html>
 <head>
 <title>D3</title>
-    <script src="https://d3js.org/d3.v4.min.js">     /*It is an source for open Source D3 library which contain all the necessary files*/
+    <script src="http://d3js.org/d3.v4.min.js">     /*It is an source for open Source D3 library which contain all the necessary files*/
 	</script>
+	
+	
 
 	<link rel="stylesheet" type="text/css" href="mystyle.css">    
 		
 </head>
 <body>
 	           
-    <svg width="700" height="600"></svg>            
+    <svg width="800" height="600"></svg>            
     <script>
 	 
         var svg = d3.select("svg"),                    /* Selects The SVG Container*/
@@ -19,7 +21,7 @@
             radius = Math.min(width, height) / 3;      /*calculating the radius for the pie Chart*/
         
         var g = svg.append("g")                               /*Adding the group for different SVG elements to come together*/
-                   .attr("transform", "translate(300,300)");  /*Adding the transformations to the group in X and Y axis*/  
+                   .attr("transform", "translate(500,300)");  /*Adding the transformations to the group in X and Y axis*/  
 
        var color = d3.scaleOrdinal(["red","green","blue","orange","yellow","grey"]);    /*Sets the range of Color we want in the Pie Chart*/
 	                  
@@ -35,6 +37,11 @@
                      .outerRadius(radius)       /*Sets An Outer Radius Of the Arc*/
                      .innerRadius(0);           /*Sets an inner Radius of an Arc and it is assigned as 0 so that we can get an shape of an Pie Chart*/
  					 
+					 
+					 var outerArc = d3.arc()
+	    .innerRadius(radius * 1.1)
+	    .outerRadius(radius * 1.1);
+
 				
 					 
 					  
@@ -57,25 +64,44 @@
 		
 		
             arc.append("text")                      /*Adds the Label in the Arc*/
-               .attr("transform", function(d) {       
+               /*.attr("transform", function(d) {       
 			   var c=path.centroid(d);                /*makes the Label appears to the center of the pie chart*/
-       return "translate(" + c[0]*2.3 +"," + c[1]*2.3  + ")rotate(" + angle(d)+")";  /*for making the label appears outside the Pie Chart*/
-
+      /* return "translate(" + c[0]*2.5 +"," + c[1]*2.5  + ")";  /*for making the label appears outside the Pie Chart*/
+/*})*/
+                       .attr("transform", function(d){
+        var pos = outerArc.centroid(d);
+        pos[0] = radius * (midAngle(d) < Math.PI ? 1.2 : -1.4);
+        return "translate("+ pos +")";
       })
+
+
+
+	  
 				.attr("text-anchor","middle")      /*The label will be marked to the center of the origin*/
-				.attr("font-size","1em")            /*sets the font size of the Label*/
-				.attr("y",function(d,i){return d.i;})    /* transforms the label in the Y direction*/
-			     .attr("fill","black")                      /* sets the color of the label*/
+				.attr("font-size","1.5em")            /*sets the font size of the Label*/
+				 .attr("fill","black")                      /* sets the color of the label*/
 			         
-               .text(function(d,i) { return  d.data.Call + "(" + d.data.Site + ")";}); /*For adding the Text in the Pie Chart*/
+               .text(function(d,i) { return  d.data.Call + "(" + d.data.Site + ")" ;})  /*For adding the Text in the Pie Chart*/
 			  
-	
-			   
-			  
-			 function angle(d) {                                 /*Rotating the Label to certain Angle*/
-      var a = (d.startAngle + d.endAngle) * 90 / Math.PI - 90;    /*A pie chart contains the start and the end angle as an object*/
-      return a > 90 ? a - 180 : a;                                 /* rotates the Label pointing to the center of the origin*/
-    };		   
+	        function midAngle(d) {
+      return d.startAngle + (d.endAngle - d.startAngle) / 2;
+    }
+
+    var polyline = g.selectAll("polyline")
+      .data(pie(data), function(d) {
+        return d.data.Call
+      })
+      .enter()
+      .append("polyline")
+      .attr("points", function(d) {
+        var pos = outerArc.centroid(d);
+            pos[0] = radius *0.95 * (midAngle(d) < Math.PI ? 1 : -1.2);
+            
+        return [path.centroid(d), outerArc.centroid(d), pos];
+      })
+      .style("fill", "none")
+      .style("stroke", "black")
+      .style("stroke-width", "1px");
 
 });
 			
