@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>D3</title>
+      <!-- Here Internal styling is used-->
+	  <!-- in body  the color of the text is set to be white ,bakground image is set and it covers the entire page-->  
+	  <!-- In ul{} the there is no magin and pading and the list style is none .there will be no disc or circles in the list-->
+	  <!-- In ul li{} , the list is set to the left Side,backround color of the list is set to black,text appears in the center,and transparency of the 
+	                          text is reduced-->
+       <!-- In ul li a{} , the there is no text decoration,color of the link is white and the list will appear as a block-->
+       <!--In ul li a:hover{}, on moving the mouse pointer to the link the color gets changed to green -->
+       <!-- In ul li ul  li{}, the sub menu will get hided by display:none-->
+       <!--In ul li:hover ul li{}, the sub menu will get displayed as on hovering the menu bar options.	   -->	   
+   
+
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<script  src="http://d3js.org/d3.v4.min.js"></script>
+
+   <style>
+	
+	             body{
+				       color:white; 
+                          background-image:url('2.jpg');					   
+			              background-size:cover;
+                            				
+					   }
+					  
+					   
+					   
+					   
+					   
+	   
+	             ul {
+				        margin:0px;        
+						padding:0px;       
+						list-style:none;  
+                          						
+						}					
+         ul li {
+	            
+				
+				text-align:center;                  
+				font-size:25px;
+				font-family:times new roman;
+				}
+		     
+
+         ul li a{
+                 text-decoration:none;  
+                 color:white;
+                 display:block; 
+                				 
+                }
+
+        ul li a:hover {               
+                 background-color:green; 
+                    }				 
+
+          ul li ul li{
+                 display:none;    
+				 }
+				 
+	ul li:hover ul li{
+                            display:block; 
+                            							
+							
+                      }		
+
+        			.footer{
+
+					 position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+					}					
+						
+						
+						.fa {
+    padding: 5px;
+    font-size: 20px;
+    width: 40px;
+    text-align: center;
+    text-decoration: none;
+    
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+    opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+	
+}
+
+/* Twitter */
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+	
+} 
+						
+					.fa-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.fa-youtube {
+  background: #bb0000;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}	
+			
+ 
+    #area1{
+	       : absolute;
+    top: 80px;
+    right: 0;
+    width: 200px;
+    height: 100px;
+    
+	
+	}
+        
+    nav.navbar{
+	   width:100%;
+	   overflow:hidden;
+	}
+ 
+ 
+      .button {
+     background:none;
+     color:inherit;
+     border:none; 
+     padding:0!important;
+     font: inherit;
+     /*border is optional*/
+     /*border-bottom:1px solid #444; */
+     cursor: pointer;
+	 
+}
+   .button:hover{
+   
+        background-color:green;
+   }
+    
+	   
+						
+     </style>
+</head>
+<body>
+
+
+                <!--for adding list in the page-->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Conjugate Gradient</a>
+    </div>
+<ul   class="nav navbar-nav">
+   <li><a>File</a>        <!-- Adding File option-->
+	<ul>                            <!-- Adding the sub menu for File Option-->
+	<li><a>New</a></li>               <!-- adds the New sub option-->
+	<li>
+<button id="inp" class="button">Open</a></li>   <!-- On clicking the open Functionality the page gets targeted  to the new file.-->
+	<li><a>Save</a></li>     <!-- adds the Save sub option-->
+	<li><a>Close</a></li>    <!-- adds the Close sub option-->
+	</ul>
+	</li>
+	                          
+	<li><a>View</a>                           <!-- Adding View Option-->
+	<ul>                  	<!--  Adding the Sub Menu for view Option-->
+	<li><a>Load</a></li>          <!-- adds the Load sub option-->
+	<li><a>Refresh</a></li>       <!-- adds the Refresh sub option-->
+	<li><a>Zoom In</a></li>      <!-- adds the Zoom In sub option-->
+	<li><a>Zoom Out</a></li>      <!-- adds the Zoom Out sub option-->
+	</ul>
+	</li>
+	</ul>
+	</div>
+	</nav>
+      
+	  <div class="footer">
+	  <a href="#" class="fa fa-facebook"></a>
+<a href="#" class="fa fa-twitter"></a>
+<a href="#" class="fa fa-google"></a>
+<a href="#" class="fa fa-linkedin"></a>
+<a href="#" class="fa fa-youtube"></a>
+<a href="#" class="fa fa-instagram"></a>
+	  </div>
+	 
+
+	  
+	 <div class="2" style="background-image:url('2.jpg');">
+             
+    <script>
+	
+	                      var element = document.createElement('div');
+                   element.innerHTML = '<input type="file" accept=".tsv">';
+                      var fileInput = element.firstChild;
+
+                        var fileSelect = document.getElementById("inp");
+            
+					   fileInput.addEventListener('change', function() { // wait for file selection
+                                var file = fileInput.files[0].name;
+                                  
+                                  // load the data 
+					 
+			  
+	d3.tsv(file, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
+	                                          function where we pass the data from the file*/
+					
+					
+					var width=900;
+					   var height=400;
+	        var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+    .attr("transform", "translate(400,200)");
+      var     radius = Math.min(width, height) / 4;      /*calculating the radius for the pie Chart*/
+
+
+       var color = d3.scaleOrdinal(["red","green","blue","orange","yellow","grey"]);    /*Sets the range of Color we want in the Pie Chart*/
+	                  
+					  
+		
+
+        var pie = d3.pie()         /*Creates the Layout For the Pie Chart*/
+		.value(function(d) {         
+                return d.MPI;       /*The pie chart contains the value of the MPI from tsv file and create the layout*/
+            });
+
+        var path = d3.arc()                   /*Creates the Layout of an Arc*/
+                     .outerRadius(radius)       /*Sets An Outer Radius Of the Arc*/
+                     .innerRadius(0);           /*Sets an inner Radius of an Arc and it is assigned as 0 so that we can get an shape of an Pie Chart*/
+ 					 
+					 
+					 var outerArc = d3.arc()
+	    .innerRadius(radius * 1.1)
+	    .outerRadius(radius * 1.1);
+		
+		 var margin = {top: 60, right: 60, bottom: 60, left:120};
+		
+		  svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("text-decoration", "underline")  
+        .text(file);
+					
+            var arc = svg.selectAll(".arc")       /* selects all the Arc and creates an array  of Object*/
+                       .data(pie(data))          /* the function pie(data) takes the data from the file and creates an object of that data as an Array*/
+                       .enter().append("g")     /*If the data elements are more than the DOM elements we call the enter to update the data */
+                       .attr("class", "arc");
+          
+		   
+            arc.append("path")                      /* Adds the Path for the arc*/
+			
+               .attr("d", path)                      /*adds the data to the path*/
+			   .attr("fill", function(d,i) { return color(i); });   /*the path is filled with the color by the data being pass
+			                                                        to the color function and each data correspinds to different color*/
+		
+		
+		
+		
+            arc.append("text")                      /*Adds the Label in the Arc*/
+                       .attr("transform", function(d){
+        var pos = outerArc.centroid(d);
+        pos[0] = radius * (midAngle(d) < Math.PI ? 1.2 : -1.4);
+        return "translate("+ pos +")";
+      })
+				.attr("text-anchor","middle")      /*The label will be marked to the center of the origin*/
+				.attr("font-size","1em")            /*sets the font size of the Label*/
+				 .attr("fill","black")                      /* sets the color of the label*/	         
+               .text(function(d,i) { return  d.data.Call + "(" + d.data.Site + ")" ;})  /*For adding the Text in the Pie Chart*/
+			  
+			  
+	        function midAngle(d) {
+      return d.startAngle + (d.endAngle - d.startAngle) / 2;
+    }
+
+    var polyline = svg.selectAll("polyline")
+      .data(pie(data), function(d) {
+        return d.data.Call
+      })
+      .enter()
+      .append("polyline")
+      .attr("points", function(d) {
+        var pos = outerArc.centroid(d);
+            pos[0] = radius *0.95 * (midAngle(d) < Math.PI ? 1 : -1.2);
+            
+        return [path.centroid(d), outerArc.centroid(d), pos];
+      })
+      .style("fill", "none")
+      .style("stroke", "black")
+      .style("stroke-width", "1px");
+
+});		
+	});		
+			
+			
+			
+			fileSelect.addEventListener("click", function () {  // wait for click on "select a file" button
+    fileInput.click();
+});
+	
+        
+</script>
+	
+	</div>
+	
+	
+	</body>
+	</html>
