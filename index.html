@@ -13,6 +13,15 @@
        <!-- In ul li ul  li{}, the sub menu will get hided by display:none-->
        <!--In ul li:hover ul li{}, the sub menu will get displayed as on hovering the menu bar options.	   -->	   
    
+   
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<meta name="HandheldFriendly" content="true">
+   
+   
 
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,14 +30,19 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	<script  src="https://d3js.org/d3.v4.min.js"></script>
+	<script  src="http://d3js.org/d3.v4.min.js"></script>
 	
 
    <style>
-	
+   
+           
+			 
+			 
+			 
+  
 	             body{
 				       color:white; 
-                          background-image:url('2.jpg');					   
+                       background-image:url('2.jpg');					   
 			              background-size:cover;
                             				
 					   }
@@ -42,14 +56,20 @@
 				         margin:0px;      
 						padding:0px;       
 						list-style:none;  
+			           position:fixed;
+				
+					
                           						
 						}					
          ul li {
 	            
 				
-				text-align:center;                  
+				text-align:left;                  
 				font-size:25px;
 				font-family:times new roman;
+		
+			
+				
 				}
 		     
 
@@ -57,6 +77,7 @@
                  text-decoration:none;  
                  color:white;
                  display:block; 
+				
                 				 
                 }
 
@@ -65,13 +86,14 @@
                     }				 
 
           ul li ul li{
-                 display:none;    
+                 display: none;
+		
+    
 				 }
 				 
 	ul li:hover ul li{
-                            display:block; 
-                            							
-							
+                            display:block;
+                             				
                       }		
 
         			.footer{
@@ -135,22 +157,9 @@
   background: #125688;
   color: white;
 }	
-			
- 
-    #area1{
-	       : absolute;
-    top: 80px;
-    right: 0;
-    width: 200px;
-    height: 100px;
-    
 	
-	}
         
-    nav.navbar{
-	   width:100%;
-	   overflow:hidden;
-	}
+    
  
  
       .button {
@@ -169,49 +178,47 @@
         background-color:green;
    }
     
-	  #mySidenav a {
-    position: absolute;
-    left: -100px;
-    transition: 0.1s;
-    padding: 15px;
-    width: 150px;
-    text-decoration: none;
-    font-size: 20px;
-    color: white;
-    border-radius: 0 5px 5px 0;
+ul.nav.navbar-nav{
+            position:sticky;
+			}
+
+	
+	.wrap {
+    width: 100%;
+	overflow:auto;
 }
 
-#mySidenav a:hover {
-    left: 0;
+.floatleft {
+        
+    float:left; 
+    width:25%;
+      height:100%;	
+   
 }
 
-
-#about {
-    top: 200px;
-    background-color: #4CAF50;
-}
-
-#blog {
-    top: 300px;
-    background-color: #2196F3;
-}
-
-#projects {
-    top: 400px;
-    background-color: #f44336;
-}
-
-#contact {
-    top: 500px;
-    background-color: #555
+.floatright {
+float: right;
+    width: 90%;
+	
 }
 
 
-						
+  .vl {
+    border: 3px solid black ;
+      border-radius: 5px;
+  height: 500%;
+  width:4px;
+    position: fixed;
+    left: 25%;
+    margin-left: -3px;
+top:0;    
+} 	
+
      </style>
+
 </head>
 <body>
-         
+       
 
                 <!--for adding list in the page-->
 <nav class="navbar navbar-inverse">
@@ -224,7 +231,7 @@
 	<ul>                            <!-- Adding the sub menu for File Option-->
 	<li><a>New</a></li>               <!-- adds the New sub option-->
 	<li>
-<button id="inp" class="button">Open</a></li>   <!-- On clicking the open Functionality the page gets targeted  to the new file.-->
+<button id="inp" class="button" >Open</button></li>   <!-- On clicking the open Functionality the page gets targeted  to the new file.-->
 	<li><a>Save</a></li>     <!-- adds the Save sub option-->
 	<li><a>Close</a></li>    <!-- adds the Close sub option-->
 	</ul>
@@ -233,7 +240,7 @@
 	<li><a>View</a>                           <!-- Adding View Option-->
 	<ul>                  	<!--  Adding the Sub Menu for view Option-->
 	<li><a>Load</a></li>          <!-- adds the Load sub option-->
-	<li><a>Refresh</a></li>       <!-- adds the Refresh sub option-->
+	<li><button id="inp" class="button" onclick="UpdateData()">Refresh</button></li>       <!-- adds the Refresh sub option-->
 	<li><a>Zoom In</a></li>      <!-- adds the Zoom In sub option-->
 	<li><a>Zoom Out</a></li>      <!-- adds the Zoom Out sub option-->
 	</ul>
@@ -243,16 +250,6 @@
 	</div>
 	</nav>
       
-	 <div id="mySidenav" class="sidenav">
-  <a href="#" id="about">About</a>
-  <a href="#" id="blog">Blog</a>
-  <a href="#" id="projects">Projects</a>
-  <a href="#" id="contact">Contact</a>
-</div>
-
-<div style="margin-left:80px;">
-  
-</div>
 	  
 	  <div class="footer">
 	  <a href="#" class="fa fa-facebook"></a>
@@ -262,45 +259,58 @@
 <a href="#" class="fa fa-youtube"></a>
 <a href="#" class="fa fa-instagram"></a>
 	  </div>
+	  
+<div class="wrap">
+    <div class="floatleft">
+
+	</div>
+	
+<div class="vl"></div>
+<div class="floatright">
+
+
+  
       <div id="charts"></div>
-            
+        
+
     <script>
 	
 	                      var element = document.createElement('div');
-                   element.innerHTML = '<input type="file"  accept=".tsv">';
+                   element.innerHTML = '<input type="file" id="in" accept=".tsv" >';
                       var fileInput = element.firstChild;
 
                         var fileSelect = document.getElementById("inp");
             
 					   fileInput.addEventListener('change', function() { // wait for file selection
-                                
-								var file = fileInput.files[0];
-								
+                            
+								var file =fileInput.files[0];
+								  
 								
 								   if (file.name.match(/\.(txt|tsv)$/)) {
                                           
                                   // load the data 
 					 
 			  
-	d3.tsv(file.name, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
+	d3.tsv("Data/" +file.name, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
 	                                          function where we pass the data from the file*/
 					
 					
-					var width=600;
-					   var height=400;
+					var width=570;
+					   var height=300;
 
       if ($('#charts svg').length === 4) {
         $('#charts svg:first').remove()
       }
 	        var svg = d3.select("#charts").append("svg")
+	
     .attr("width", width)
     .attr("height", height)
     .append("g")
-    .attr("transform", "translate(400,200)");
-      var     radius = Math.min(width, height) / 4;      /*calculating the radius for the pie Chart*/
+    .attr("transform", "translate(420,130)");
+      var     radius = Math.min(width, height) /3;      /*calculating the radius for the pie Chart*/
   var textOffset=14;
 
-       var color = d3.scaleOrdinal(["blue","red","yellow"]);    /*Sets the range of Color we want in the Pie Chart*/
+       var color = d3.scaleOrdinal([" #41049d", "#6a00a8", "#8f0da4", "#b12a90", "#cb4679", "#e16462"]);    /*Sets the range of Color we want in the Pie Chart*/
 	                  
 					  
 		
@@ -321,7 +331,7 @@
 		
 		
 		  svg.append("text")
-        .attr("transform","translate(0,150)")
+        .attr("transform","translate(0,135)")
         .attr("text-anchor", "middle")  
         .style("font-size", "16px") 
         .style("text-decoration", "underline")  
@@ -417,11 +427,158 @@ labels.each(function(d, i) {
     fileInput.click();
 });
 	
+	
+	
+	
         
 </script>
+
+<script>
+                                        
+										/////Refresh Functionality
 	
 	
+	    
+                  function  UpdateData()
+		 {
+					 
+                           
+var files=["cg.1.tsv","cg.2.tsv","cg.3.tsv","cg.4.tsv","cg.5.tsv","cg.6.tsv","cg.7.tsv","cg.8.tsv","cg.9.tsv","cg.10.tsv","cg.11.tsv","cg.12.tsv"];
+                          
+						  files.forEach(function(f){
+						  
+                        
+					
+					d3.tsv("Data/" +f, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
+	                                          function where we pass the data from the file*/
+							  
+                     
+					var width=570;
+					   var height=300;
+					   if ($('#charts svg').length === 4) {
+        $('#charts svg:first').remove()
+      }
+	        var svg = d3.select("#charts").append("svg")
 	
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+    .attr("transform", "translate(420,130)");
+      var     radius = Math.min(width, height) /3;      /*calculating the radius for the pie Chart*/
+  var textOffset=14;
+
+       var color = d3.scaleOrdinal([" #41049d", "#6a00a8", "#8f0da4", "#b12a90", "#cb4679", "#e16462"]);    /*Sets the range of Color we want in the Pie Chart*/
+	                  
+					  
+		
+
+        var pie = d3.pie()         /*Creates the Layout For the Pie Chart*/
+		.value(function(d) {         
+                return d.MPI;       /*The pie chart contains the value of the MPI from tsv file and create the layout*/
+            });
+
+        var path = d3.arc()                   /*Creates the Layout of an Arc*/
+                     .outerRadius(radius)       /*Sets An Outer Radius Of the Arc*/
+                     .innerRadius(0);           /*Sets an inner Radius of an Arc and it is assigned as 0 so that we can get an shape of an Pie Chart*/
+ 					 
+					 
+					 var outerArc = d3.arc()
+	    .innerRadius(radius * 1.1)
+	    .outerRadius(radius * 1.1);
+		
+		
+		 svg.append("text")
+        .attr("transform","translate(0,135)")
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("text-decoration", "underline")  
+        .text(f);
+					
+            var arc = svg.selectAll(".arc")       /* selects all the Arc and creates an array  of Object*/
+                       .data(pie(data))          /* the function pie(data) takes the data from the file and creates an object of that data as an Array*/
+                       .enter().append("g")     /*If the data elements are more than the DOM elements we call the enter to update the data */
+                       .attr("class", "arc");
+          
+		   
+            arc.append("path")                      /* Adds the Path for the arc*/
+			
+               .attr("d", path)                      /*adds the data to the path*/
+			   .attr("fill", function(d,i) { return color(i); });   /*the path is filled with the color by the data being pass
+			                                                        to the color function and each data correspinds to different color*/
+		
+		
+		
+		
+         var labels=     arc.append("text")                      /*Adds the Label in the Arc*/
+                       .attr("transform", function(d){
+        var pos = outerArc.centroid(d);
+        pos[0] = radius * (midAngle(d) < Math.PI ? 1.2 : -1.4);
+        return "translate("+ pos +")"})
+				.attr("text-anchor","middle")      /*The label will be marked to the center of the origin*/
+				.attr("font-size","1em")            /*sets the font size of the Label*/
+				 .attr("fill","black")  				 /* sets the color of the label*/	   	 
+               .text(function(d,i) { return  d.data.Call + "(" + d.data.Site + ")" ;});  /*For adding the Text in the Pie Chart*/
+			   
+	var prev;
+labels.each(function(d, i) {
+  if(i > 0) {
+    var thisbb = this.getBoundingClientRect(),
+        prevbb = prev.getBoundingClientRect();
+    // move if they overlap
+    if(!(thisbb.right < prevbb.left || 
+            thisbb.left > prevbb.right || 
+            thisbb.bottom < prevbb.top || 
+            thisbb.top > prevbb.bottom)) {
+        var ctx = thisbb.left + (thisbb.right - thisbb.left)/2,
+            cty = thisbb.top + (thisbb.bottom - thisbb.top)/2,
+            cpx = prevbb.left + (prevbb.right - prevbb.left)/2,
+            cpy = prevbb.top + (prevbb.bottom - prevbb.top)/2,
+            off = Math.sqrt(Math.pow(ctx - cpx, 2) + Math.pow(cty - cpy, 2))/2;
+        d3.select(this).attr("transform",
+            "translate(" + Math.cos(((d.startAngle + d.endAngle - Math.PI) / 2)) *
+                                    (radius + textOffset + off) + "," +
+                           Math.sin((d.startAngle + d.endAngle - Math.PI) / 2) *
+                                    (radius + textOffset + off) + ")");
+    }
+  }
+  prev = this;
+});
 	
+	           
+			  
+			  
+	        function midAngle(d) {
+      return d.startAngle + (d.endAngle - d.startAngle) / 2;
+    }
+
+    var polyline = svg.selectAll("polyline")
+      .data(pie(data), function(d) {
+        return d.data.Call
+      })
+      .enter()
+      .append("polyline")
+      .attr("points", function(d) {
+        var pos = outerArc.centroid(d);
+            pos[0] = radius *0.95 * (midAngle(d) < Math.PI ? 1 : -1.2);
+            
+        return [path.centroid(d), outerArc.centroid(d), pos];
+      })
+      .style("fill", "none")
+      .style("stroke", "black")
+      .style("stroke-width", "1px");
+	 
+	  
+	 }); 
+});
+	 
+}
+
+																	
+</script>
+
+
+	</div>
+    <div style="clear: both;"></div>
+</div>
 	</body>
 	</html>
