@@ -30,9 +30,16 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	<script  src="https://d3js.org/d3.v4.min.js"></script>
+	<script  src="http://d3js.org/d3.v4.min.js"></script>
+	
+<script src="jquery.min.js"></script>
+<script src="jquery-ui.js"></script>
+
 	
 
+	
+	
+	
    <style>
    
            
@@ -183,40 +190,61 @@ ul.nav.navbar-nav{
 			}
 
 	
-	.wrap {
+	#wrap {
     width: 100%;
-	overflow:auto;
+	height:100%;
 }
 
-.floatleft {
-        
+#floatleft {
+     
     float:left; 
     width:25%;
       height:100%;	
+	 
    
 }
 
-.floatright {
-float: right;
-    width: 90%;
-	
+#floatright {
+       position:absolute;
+	   width:80%;
+     right: 0;
+    top:0;
+    bottom: 0;
+      background-image:url('2.jpg');
+	  margin-top:52px;
+	  margin-bottom:30px;
+	  overflow-y:auto;
+
 }
 
+ #vl {
+       width: 10px;
+      position: absolute;
+    top:0;
+    bottom:0;
+	left:-3px;
+    cursor: w-resize;
+} 
 
-  .vl {
-    border: 3px solid black ;
-      border-radius: 5px;
-  height: 500%;
-  width:4px;
-    position: fixed;
-    left: 25%;
-    margin-left: -3px;
-top:0;    
-} 	
+
+
 
      </style>
+	 
+	 
+	 
+	 <script type="text/javascript">
+$(document).ready(function(){
+    $("#clr").click(function(){
+        $("#charts").empty();
+    });
+});
+</script>
 
 </head>
+
+
+
 <body>
        
 
@@ -231,7 +259,7 @@ top:0;
 	<ul>                            <!-- Adding the sub menu for File Option-->
 	<li><a>New</a></li>               <!-- adds the New sub option-->
 	<li>
-<button id="inp" class="button" >Open</button></li>   <!-- On clicking the open Functionality the page gets targeted  to the new file.-->
+<button id="inp" class="button">Open</button></li>   <!-- On clicking the open Functionality the page gets targeted  to the new file.-->
 	<li><a>Save</a></li>     <!-- adds the Save sub option-->
 	<li><a>Close</a></li>    <!-- adds the Close sub option-->
 	</ul>
@@ -239,8 +267,8 @@ top:0;
 	                          
 	<li><a>View</a>                           <!-- Adding View Option-->
 	<ul>                  	<!--  Adding the Sub Menu for view Option-->
-	<li><a>Load</a></li>          <!-- adds the Load sub option-->
-	<li><button id="inp" class="button" onclick="UpdateData()">Refresh</button></li>       <!-- adds the Refresh sub option-->
+	<li><button id="clr" class="button">Clean</button></li>          <!-- adds the Load sub option-->
+	<li><button id="inp1" class="button">Refresh</button></li>       <!-- adds the Refresh sub option-->
 	<li><a>Zoom In</a></li>      <!-- adds the Zoom In sub option-->
 	<li><a>Zoom Out</a></li>      <!-- adds the Zoom Out sub option-->
 	</ul>
@@ -260,19 +288,15 @@ top:0;
 <a href="#" class="fa fa-instagram"></a>
 	  </div>
 	  
-<div class="wrap">
-    <div class="floatleft">
-
+<div id="wrap">
+    <div  id="floatleft">
 	</div>
 	
-<div class="vl"></div>
-<div class="floatright">
 
-
+<div id="floatright" >
+<div id="vl"></div>
   
       <div id="charts"></div>
-        
-
     <script>
 	
 	                      var element = document.createElement('div');
@@ -290,13 +314,13 @@ top:0;
                                           
                                   // load the data 
 					 
-			  
+			
 	d3.tsv("Data/" +file.name, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
 	                                          function where we pass the data from the file*/
 					
 					
-					var width=570;
-					   var height=300;
+					var width=500;
+					   var height=280;
 
       if ($('#charts svg').length === 4) {
         $('#charts svg:first').remove()
@@ -306,12 +330,15 @@ top:0;
     .attr("width", width)
     .attr("height", height)
     .append("g")
-    .attr("transform", "translate(420,130)");
+    .attr("transform", "translate(300,130)");
       var     radius = Math.min(width, height) /3;      /*calculating the radius for the pie Chart*/
-  var textOffset=14;
+  var textOffset=6; 
+  
+  
 
-       var color = d3.scaleOrdinal([" #41049d", "#6a00a8", "#8f0da4", "#b12a90", "#cb4679", "#e16462"]);    /*Sets the range of Color we want in the Pie Chart*/
-	                  
+
+       var color = d3.scaleOrdinal(["#0d0887", "#41049d", "#6a00a8", "#8f0da4","#b12a90", "#cb4679"]); /*Sets the range of Color we want in the Pie Chart*/
+	 					
 					  
 		
 
@@ -336,31 +363,54 @@ top:0;
         .style("font-size", "16px") 
         .style("text-decoration", "underline")  
         .text(file.name);
-					
+				
+         
+
+
+				
             var arc = svg.selectAll(".arc")       /* selects all the Arc and creates an array  of Object*/
                        .data(pie(data))          /* the function pie(data) takes the data from the file and creates an object of that data as an Array*/
                        .enter().append("g")     /*If the data elements are more than the DOM elements we call the enter to update the data */
                        .attr("class", "arc");
-          
+          var text;
 		   
             arc.append("path")                      /* Adds the Path for the arc*/
 			
                .attr("d", path)                      /*adds the data to the path*/
-			   .attr("fill", function(d,i) { return color(i); });   /*the path is filled with the color by the data being pass
+			   .attr("fill", function(d,i) { return color(i); })  /*the path is filled with the color by the data being pass
 			                                                        to the color function and each data correspinds to different color*/
-		
-		
-		
-		
-         var labels=     arc.append("text")                      /*Adds the Label in the Arc*/
-                       .attr("transform", function(d){
+		        
+				 .on("mouseenter", function(d){
+				     text =arc.append("text")
+					   .attr("transform", outerArc.centroid(d))
+                    .style("text-anchor", "middle")
+                    .style("fill", "black")
+				
+                    .attr("class", "on")
+                    .text(d.data.MPI);
+					   })
+				 .on("mouseout", function(d) {
+                   text.remove();
+        });
+
+				 
+		        
+		       
+			 
+         var labels=arc.append("text")   		 /*Adds the Label in the Arc*/
+				     .attr("transform", function(d){
         var pos = outerArc.centroid(d);
-        pos[0] = radius * (midAngle(d) < Math.PI ? 1.2 : -1.4);
+        pos[0] = radius * (midAngle(d) < Math.PI ? 1.3 : -1.4);
         return "translate("+ pos +")"})
 				.attr("text-anchor","middle")      /*The label will be marked to the center of the origin*/
-				.attr("font-size","1em")            /*sets the font size of the Label*/
-				 .attr("fill","black")  				 /* sets the color of the label*/	   	 
-               .text(function(d,i) { return  d.data.Call + "(" + d.data.Site + ")" ;});  /*For adding the Text in the Pie Chart*/
+				.attr("font-size","1.2em")            /*sets the font size of the Label*/
+			 .attr("fill","black")  				 /* sets the color of the label*/	
+			 .attr("y","-0.2em")
+			 .attr("font-family","times new roman")
+			 
+             .text(function(d,i) { return  d.data.Call + "(" + d.data.Site + ")" ;}); /*For adding the Text in the Pie Chart*/
+			  
+			   
 			   
 	var prev;
 labels.each(function(d, i) {
@@ -386,10 +436,11 @@ labels.each(function(d, i) {
   }
   prev = this;
 });
-	
-	           
 			  
-			  
+
+
+
+			
 	        function midAngle(d) {
       return d.startAngle + (d.endAngle - d.startAngle) / 2;
     }
@@ -408,6 +459,7 @@ labels.each(function(d, i) {
       })
       .style("fill", "none")
       .style("stroke", "black")
+	
       .style("stroke-width", "1px");
 
 });		
@@ -427,47 +479,50 @@ labels.each(function(d, i) {
     fileInput.click();
 });
 	
-	
-	
-	
         
 </script>
 
 <script>
-                                        
-										/////Refresh Functionality
-	
-	
-	    
-                  function  UpdateData()
-		 {
-					 
-                           
-var files=["cg.1.tsv","cg.2.tsv","cg.3.tsv","cg.4.tsv","cg.5.tsv","cg.6.tsv","cg.7.tsv","cg.8.tsv","cg.9.tsv","cg.10.tsv","cg.11.tsv","cg.12.tsv"];
-                          
-						  files.forEach(function(f){
-						  
-                        
-					
-					d3.tsv("Data/" +f, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
+
+									/////Refresh Functionality
+									
+									 var container = document.createElement('div');
+                   container.innerHTML = '<input type="file" id="file1"  accept=".tsv"  webkitdirectory directory multiple>';
+                      var Input = container.firstChild;
+
+                        var Select = document.getElementById("inp1");
+            
+					   Input.addEventListener('change', function() { // wait for file selection
+                            
+							
+			
+								   if(Input.files.length>4)
+							     
+							{
+			
+									  var i=Input.files.length-4;
+									        
+									 for(var a=i; a<i+4; a++){
+									  
+								 var file=Input.files[a].name;
+						                
+					d3.tsv("Data/" +file, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
 	                                          function where we pass the data from the file*/
 							  
                      
-					var width=570;
-					   var height=300;
-					   if ($('#charts svg').length === 4) {
-        $('#charts svg:first').remove()
-      }
+					var width=500;
+					   var height=280;
+					  
 	        var svg = d3.select("#charts").append("svg")
 	
     .attr("width", width)
     .attr("height", height)
     .append("g")
-    .attr("transform", "translate(420,130)");
+    .attr("transform", "translate(300,130)");
       var     radius = Math.min(width, height) /3;      /*calculating the radius for the pie Chart*/
   var textOffset=14;
 
-       var color = d3.scaleOrdinal([" #41049d", "#6a00a8", "#8f0da4", "#b12a90", "#cb4679", "#e16462"]);    /*Sets the range of Color we want in the Pie Chart*/
+       var color = d3.scaleOrdinal(["#0d0887", "#41049d", "#6a00a8", "#8f0da4","#b12a90", "#cb4679"]);    /*Sets the range of Color we want in the Pie Chart*/
 	                  
 					  
 		
@@ -492,7 +547,7 @@ var files=["cg.1.tsv","cg.2.tsv","cg.3.tsv","cg.4.tsv","cg.5.tsv","cg.6.tsv","cg
         .attr("text-anchor", "middle")  
         .style("font-size", "16px") 
         .style("text-decoration", "underline")  
-        .text(f);
+        .text(file);
 					
             var arc = svg.selectAll(".arc")       /* selects all the Arc and creates an array  of Object*/
                        .data(pie(data))          /* the function pie(data) takes the data from the file and creates an object of that data as an Array*/
@@ -517,8 +572,9 @@ var files=["cg.1.tsv","cg.2.tsv","cg.3.tsv","cg.4.tsv","cg.5.tsv","cg.6.tsv","cg
 				.attr("text-anchor","middle")      /*The label will be marked to the center of the origin*/
 				.attr("font-size","1em")            /*sets the font size of the Label*/
 				 .attr("fill","black")  				 /* sets the color of the label*/	   	 
-               .text(function(d,i) { return  d.data.Call + "(" + d.data.Site + ")" ;});  /*For adding the Text in the Pie Chart*/
+               .text(function(d,i) { return  d.data.Call + "(" + d.data.Site + ")" ;})  /*For adding the Text in the Pie Chart*/
 			   
+
 	var prev;
 labels.each(function(d, i) {
   if(i > 0) {
@@ -568,17 +624,69 @@ labels.each(function(d, i) {
       .style("stroke-width", "1px");
 	 
 	  
-	 }); 
+	 });
+	 }
+
+}
+	
+	 });		
+			
+			
+			
+		Select.addEventListener("click", function () {  // wait for click on "select a file" button
+                Input.click();
 });
 	 
-}
+	
 
 																	
 </script>
-
-
 	</div>
-    <div style="clear: both;"></div>
 </div>
+
+
+ <script>
+        var isResizing = false,
+            lastDownX = 0;
+
+        (function() {
+            var container = document.getElementById("wrap"),
+                left = document.getElementById("floatleft"),
+                right = document.getElementById("floatright"),
+                handle = document.getElementById("vl");
+
+            handle.onmousedown = function(e) {
+                isResizing = true;
+                lastDownX = e.clientX;
+            };
+
+            document.onmousemove = function(e) {
+                // we don't want to do anything if we aren't resizing.
+                if (!isResizing) {
+                    return;
+                }
+
+                var offsetRight = container.clientWidth - (e.clientX - container.offsetLeft);
+
+                left.style.right = offsetRight + "px"; 
+                right.style.width = offsetRight + "px"; 
+            }
+
+            document.onmouseup = function(e) {
+                // stop resizing
+                isResizing = false;
+            }
+        })();
+
+
+    </script>
+
+
+
+
+
+
 	</body>
+	
+	
 	</html>
