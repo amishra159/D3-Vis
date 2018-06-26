@@ -30,221 +30,55 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	<script  src="https://d3js.org/d3.v4.min.js"></script>
+	<script  src="http://d3js.org/d3.v4.min.js"></script>
+	<script src="http://d3js.org/queue.v1.min.js"></script>
 	
 <script src="jquery.min.js"></script>
 <script src="jquery-ui.js"></script>
 
-	
-
-	
-	
-	
-   <style>
-   
-           
-			 
-			 
-			 
-  
-	             body{
-				       color:white; 
-                       background-image:url('2.jpg');					   
-			              background-size:cover;
-                            				
-					   }
-					  
-					   
-					   
-					   
-					   
 	   
-	             ul {    
-				         margin:0px;      
-						padding:0px;       
-						list-style:none;  
-			           position:fixed;
-				
-					
-                          						
-						}					
-         ul li {
-	            
-				
-				text-align:left;                  
-				font-size:25px;
-				font-family:times new roman;
-		
-			
-				
-				}
-		     
-
-         ul li a{
-                 text-decoration:none;  
-                 color:white;
-                 display:block; 
-				
-                				 
-                }
-
-        ul li a:hover {               
-                 background-color:green; 
-                    }				 
-
-          ul li ul li{
-                 display: none;
-		
-    
-				 }
-				 
-	ul li:hover ul li{
-                            display:block;
-                             				
-                      }		
-
-        			.footer{
-
-					 position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: black;
-    color: white;
-    text-align: center;
-					}					
-						
-						
-						.fa {
-    padding: 5px;
-    font-size: 20px;
-    width: 40px;
-    text-align: center;
-    text-decoration: none;
-    
-}
-
-/* Add a hover effect if you want */
-.fa:hover {
-    opacity: 0.7;
-}
-
-/* Set a specific color for each brand */
-
-/* Facebook */
-.fa-facebook {
-    background: #3B5998;
-    color: white;
+<link rel="stylesheet" href="style.css"  type="text/css">
 	
-}
-
-/* Twitter */
-.fa-twitter {
-    background: #55ACEE;
-    color: white;
-	
-} 
-						
-					.fa-google {
-  background: #dd4b39;
-  color: white;
-}
-
-.fa-linkedin {
-  background: #007bb5;
-  color: white;
-}
-
-.fa-youtube {
-  background: #bb0000;
-  color: white;
-}
-
-.fa-instagram {
-  background: #125688;
-  color: white;
-}	
-	
-        
-    
- 
- 
-      .button {
-     background:none;
-     color:inherit;
-     border:none; 
-     padding:0!important;
-     font: inherit;
-     /*border is optional*/
-     /*border-bottom:1px solid #444; */
-     cursor: pointer;
-	 
-}
-   .button:hover{
-   
-        background-color:green;
-   }
-    
-ul.nav.navbar-nav{
-            position:sticky;
-			}
-
-	
-	#wrap {
-    width: 100%;
-	height:100%;
-}
-
-#floatleft {
-     
-    float:left; 
-    width:25%;
-      height:100%;	
-	 
-   
-}
-
-#floatright {
-       position:absolute;
-	   width:80%;
-     right: 0;
-    top:0;
-    bottom: 0;
-      background-image:url('2.jpg');
-	  margin-top:52px;
-	  margin-bottom:30px;
-	  overflow-y:auto;
-
-}
-
- #vl {
-       width: 10px;
-      position: absolute;
-    top:0;
-    bottom:0;
-	left:-3px;
-    cursor: w-resize;
-} 
-
-
-
-
-     </style>
-	 
-	 
-	 
-	 <script type="text/javascript">
+<script type="text/javascript">
 $(document).ready(function(){
     $("#clr").click(function(){
         $("#charts").empty();
     });
 });
+      $(document).ready(function(){
+    $("#clr").click(function(){
+        $("#chart2").empty();
+    });
+});
+
+$(document).ready(function(){
+    $("#inp").click(function(){
+        $("#chart2").hide(2000);
+		$("#charts").show();
+    });
+});
+
+$(document).ready(function(){
+    $("#cur").click(function(){
+        $("#charts").hide(2000);
+		$("#chart2").show();
+    });
+});
+
+$(document).ready(function(){
+$("#cur").click(function(){
+    $("#in").click();
+});
+});
+
+$(document).ready(function(){
+$("#inp1").click(function(){
+    $("#ref").click();
+});
+});
 </script>
 
 </head>
-
-
-
 <body>
        
 
@@ -268,7 +102,9 @@ $(document).ready(function(){
 	<li><a>View</a>                           <!-- Adding View Option-->
 	<ul>                  	<!--  Adding the Sub Menu for view Option-->
 	<li><button id="clr" class="button">Clean</button></li>          <!-- adds the Load sub option-->
-	<li><button id="inp1" class="button">Refresh</button></li>       <!-- adds the Refresh sub option-->
+	<li><input type="file" style="display:none" id="in" webkitdirectory directory  multiple   onchange="fileSelect(this)"/><button id="cur" class="button">Current</button></li>
+	<li><button id="inp1" class="button" onclick="updateFile()">Refresh</button></li>       <!-- adds the Refresh sub option-->
+	<li><button id="agr" class="button">Aggregate</button></li>
 	<li><a>Zoom In</a></li>      <!-- adds the Zoom In sub option-->
 	<li><a>Zoom Out</a></li>      <!-- adds the Zoom Out sub option-->
 	</ul>
@@ -292,359 +128,16 @@ $(document).ready(function(){
     <div  id="floatleft">
 	</div>
 	
-
 <div id="floatright" >
 <div id="vl"></div>
   
-      <div id="charts"></div>
-    <script>
-	
-	                      var element = document.createElement('div');
-                   element.innerHTML = '<input type="file" id="in" accept=".tsv" >';
-                      var fileInput = element.firstChild;
-
-                        var fileSelect = document.getElementById("inp");
-            
-					   fileInput.addEventListener('change', function() { // wait for file selection
-                            
-								var file =fileInput.files[0];
-								  
-								
-								   if (file.name.match(/\.(txt|tsv)$/)) {
-                                          
-                                  // load the data 
-					 
-			
-	d3.tsv("Data/" +file.name, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
-	                                          function where we pass the data from the file*/
-					
-					
-					var width=500;
-					   var height=280;
-
-      if ($('#charts svg').length === 4) {
-        $('#charts svg:first').remove()
-      }
-	        var svg = d3.select("#charts").append("svg")
-	
-    .attr("width", width)
-    .attr("height", height)
-    .append("g")
-    .attr("transform", "translate(300,130)");
-      var     radius = Math.min(width, height) /3;      /*calculating the radius for the pie Chart*/
-  var textOffset=6; 
-  
-  
-
-
-       var color = d3.scaleOrdinal(["#0d0887", "#41049d", "#6a00a8", "#8f0da4","#b12a90", "#cb4679"]); /*Sets the range of Color we want in the Pie Chart*/
-	 					
-					  
-		
-
-        var pie = d3.pie()         /*Creates the Layout For the Pie Chart*/
-		.value(function(d) {         
-                return d.MPI;       /*The pie chart contains the value of the MPI from tsv file and create the layout*/
-            });
-
-        var path = d3.arc()                   /*Creates the Layout of an Arc*/
-                     .outerRadius(radius)       /*Sets An Outer Radius Of the Arc*/
-                     .innerRadius(0);           /*Sets an inner Radius of an Arc and it is assigned as 0 so that we can get an shape of an Pie Chart*/
- 					 
-					 
-					 var outerArc = d3.arc()
-	    .innerRadius(radius * 1.1)
-	    .outerRadius(radius * 1.1);
-		
-		
-		  svg.append("text")
-        .attr("transform","translate(0,135)")
-        .attr("text-anchor", "middle")  
-        .style("font-size", "16px") 
-        .style("text-decoration", "underline")  
-        .text(file.name);
-				
-         
-
-
-				
-            var arc = svg.selectAll(".arc")       /* selects all the Arc and creates an array  of Object*/
-                       .data(pie(data))          /* the function pie(data) takes the data from the file and creates an object of that data as an Array*/
-                       .enter().append("g")     /*If the data elements are more than the DOM elements we call the enter to update the data */
-                       .attr("class", "arc");
-          var text;
-		   
-            arc.append("path")                      /* Adds the Path for the arc*/
-			
-               .attr("d", path)                      /*adds the data to the path*/
-			   .attr("fill", function(d,i) { return color(i); })  /*the path is filled with the color by the data being pass
-			                                                        to the color function and each data correspinds to different color*/
-		        
-				 .on("mouseenter", function(d){
-				     text =arc.append("text")
-					   .attr("transform", outerArc.centroid(d))
-                    .style("text-anchor", "middle")
-                    .style("fill", "black")
-				
-                    .attr("class", "on")
-                    .text(d.data.MPI);
-					   })
-				 .on("mouseout", function(d) {
-                   text.remove();
-        });
-
-				 
-		        
-		       
-			 
-         var labels=arc.append("text")   		 /*Adds the Label in the Arc*/
-				     .attr("transform", function(d){
-        var pos = outerArc.centroid(d);
-        pos[0] = radius * (midAngle(d) < Math.PI ? 1.3 : -1.4);
-        return "translate("+ pos +")"})
-				.attr("text-anchor","middle")      /*The label will be marked to the center of the origin*/
-				.attr("font-size","1.2em")            /*sets the font size of the Label*/
-			 .attr("fill","black")  				 /* sets the color of the label*/	
-			 .attr("y","-0.2em")
-			 .attr("font-family","times new roman")
-			 
-             .text(function(d,i) { return  d.data.Call + "(" + d.data.Site + ")" ;}); /*For adding the Text in the Pie Chart*/
-			  
-			   
-			   
-	var prev;
-labels.each(function(d, i) {
-  if(i > 0) {
-    var thisbb = this.getBoundingClientRect(),
-        prevbb = prev.getBoundingClientRect();
-    // move if they overlap
-    if(!(thisbb.right < prevbb.left || 
-            thisbb.left > prevbb.right || 
-            thisbb.bottom < prevbb.top || 
-            thisbb.top > prevbb.bottom)) {
-        var ctx = thisbb.left + (thisbb.right - thisbb.left)/2,
-            cty = thisbb.top + (thisbb.bottom - thisbb.top)/2,
-            cpx = prevbb.left + (prevbb.right - prevbb.left)/2,
-            cpy = prevbb.top + (prevbb.bottom - prevbb.top)/2,
-            off = Math.sqrt(Math.pow(ctx - cpx, 2) + Math.pow(cty - cpy, 2))/2;
-        d3.select(this).attr("transform",
-            "translate(" + Math.cos(((d.startAngle + d.endAngle - Math.PI) / 2)) *
-                                    (radius + textOffset + off) + "," +
-                           Math.sin((d.startAngle + d.endAngle - Math.PI) / 2) *
-                                    (radius + textOffset + off) + ")");
-    }
-  }
-  prev = this;
-});
-			  
-
-
-
-			
-	        function midAngle(d) {
-      return d.startAngle + (d.endAngle - d.startAngle) / 2;
-    }
-
-    var polyline = svg.selectAll("polyline")
-      .data(pie(data), function(d) {
-        return d.data.Call
-      })
-      .enter()
-      .append("polyline")
-      .attr("points", function(d) {
-        var pos = outerArc.centroid(d);
-            pos[0] = radius *0.95 * (midAngle(d) < Math.PI ? 1 : -1.2);
-            
-        return [path.centroid(d), outerArc.centroid(d), pos];
-      })
-      .style("fill", "none")
-      .style("stroke", "black")
-	
-      .style("stroke-width", "1px");
-
-});		
-
-    }
-
- else {
-
-        alert("File not supported, .txt or .tsv files only");
-
-    }
-	});		
-			
-			
-			
-			fileSelect.addEventListener("click", function () {  // wait for click on "select a file" button
-    fileInput.click();
-});
-	
-        
-</script>
-
-<script>
-
-									/////Refresh Functionality
-									
-									 var container = document.createElement('div');
-                   container.innerHTML = '<input type="file" id="file1"  accept=".tsv"  webkitdirectory directory multiple>';
-                      var Input = container.firstChild;
-
-                        var Select = document.getElementById("inp1");
-            
-					   Input.addEventListener('change', function() { // wait for file selection
-                            
-							
-			
-								   if(Input.files.length>4)
-							     
-							{
-			
-									  var i=Input.files.length-4;
-									        
-									 for(var a=i; a<i+4; a++){
-									  
-								 var file=Input.files[a].name;
-						                
-					d3.tsv("Data/" +file, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
-	                                          function where we pass the data from the file*/
-							  
-                     
-					var width=500;
-					   var height=280;
-					  
-	        var svg = d3.select("#charts").append("svg")
-	
-    .attr("width", width)
-    .attr("height", height)
-    .append("g")
-    .attr("transform", "translate(300,130)");
-      var     radius = Math.min(width, height) /3;      /*calculating the radius for the pie Chart*/
-  var textOffset=14;
-
-       var color = d3.scaleOrdinal(["#0d0887", "#41049d", "#6a00a8", "#8f0da4","#b12a90", "#cb4679"]);    /*Sets the range of Color we want in the Pie Chart*/
-	                  
-					  
-		
-
-        var pie = d3.pie()         /*Creates the Layout For the Pie Chart*/
-		.value(function(d) {         
-                return d.MPI;       /*The pie chart contains the value of the MPI from tsv file and create the layout*/
-            });
-
-        var path = d3.arc()                   /*Creates the Layout of an Arc*/
-                     .outerRadius(radius)       /*Sets An Outer Radius Of the Arc*/
-                     .innerRadius(0);           /*Sets an inner Radius of an Arc and it is assigned as 0 so that we can get an shape of an Pie Chart*/
- 					 
-					 
-					 var outerArc = d3.arc()
-	    .innerRadius(radius * 1.1)
-	    .outerRadius(radius * 1.1);
-		
-		
-		 svg.append("text")
-        .attr("transform","translate(0,135)")
-        .attr("text-anchor", "middle")  
-        .style("font-size", "16px") 
-        .style("text-decoration", "underline")  
-        .text(file);
-					
-            var arc = svg.selectAll(".arc")       /* selects all the Arc and creates an array  of Object*/
-                       .data(pie(data))          /* the function pie(data) takes the data from the file and creates an object of that data as an Array*/
-                       .enter().append("g")     /*If the data elements are more than the DOM elements we call the enter to update the data */
-                       .attr("class", "arc");
-          
-		   
-            arc.append("path")                      /* Adds the Path for the arc*/
-			
-               .attr("d", path)                      /*adds the data to the path*/
-			   .attr("fill", function(d,i) { return color(i); });   /*the path is filled with the color by the data being pass
-			                                                        to the color function and each data correspinds to different color*/
-		
-		
-		
-		
-         var labels=     arc.append("text")                      /*Adds the Label in the Arc*/
-                       .attr("transform", function(d){
-        var pos = outerArc.centroid(d);
-        pos[0] = radius * (midAngle(d) < Math.PI ? 1.2 : -1.4);
-        return "translate("+ pos +")"})
-				.attr("text-anchor","middle")      /*The label will be marked to the center of the origin*/
-				.attr("font-size","1em")            /*sets the font size of the Label*/
-				 .attr("fill","black")  				 /* sets the color of the label*/	   	 
-               .text(function(d,i) { return  d.data.Call + "(" + d.data.Site + ")" ;})  /*For adding the Text in the Pie Chart*/
-			   
-
-	var prev;
-labels.each(function(d, i) {
-  if(i > 0) {
-    var thisbb = this.getBoundingClientRect(),
-        prevbb = prev.getBoundingClientRect();
-    // move if they overlap
-    if(!(thisbb.right < prevbb.left || 
-            thisbb.left > prevbb.right || 
-            thisbb.bottom < prevbb.top || 
-            thisbb.top > prevbb.bottom)) {
-        var ctx = thisbb.left + (thisbb.right - thisbb.left)/2,
-            cty = thisbb.top + (thisbb.bottom - thisbb.top)/2,
-            cpx = prevbb.left + (prevbb.right - prevbb.left)/2,
-            cpy = prevbb.top + (prevbb.bottom - prevbb.top)/2,
-            off = Math.sqrt(Math.pow(ctx - cpx, 2) + Math.pow(cty - cpy, 2))/2;
-        d3.select(this).attr("transform",
-            "translate(" + Math.cos(((d.startAngle + d.endAngle - Math.PI) / 2)) *
-                                    (radius + textOffset + off) + "," +
-                           Math.sin((d.startAngle + d.endAngle - Math.PI) / 2) *
-                                    (radius + textOffset + off) + ")");
-    }
-  }
-  prev = this;
-});
-	
-	           
-			  
-			  
-	        function midAngle(d) {
-      return d.startAngle + (d.endAngle - d.startAngle) / 2;
-    }
-
-    var polyline = svg.selectAll("polyline")
-      .data(pie(data), function(d) {
-        return d.data.Call
-      })
-      .enter()
-      .append("polyline")
-      .attr("points", function(d) {
-        var pos = outerArc.centroid(d);
-            pos[0] = radius *0.95 * (midAngle(d) < Math.PI ? 1 : -1.2);
-            
-        return [path.centroid(d), outerArc.centroid(d), pos];
-      })
-      .style("fill", "none")
-      .style("stroke", "black")
-      .style("stroke-width", "1px");
-	 
-	  
-	 });
-	 }
-
-}
-	
-	 });		
-			
-			
-			
-		Select.addEventListener("click", function () {  // wait for click on "select a file" button
-                Input.click();
-});
-	 
-	
-
-																	
-</script>
+      <div id="charts"></div><div id="chart2"></div>
+    <script type="text/javascript" src="script1.js"></script>
+	<script type="text/javascript" src="script2.js"></script>
+	<script  src="script3.js"></script>
 	</div>
+	
 </div>
-
-
  <script>
         var isResizing = false,
             lastDownX = 0;
@@ -680,13 +173,5 @@ labels.each(function(d, i) {
 
 
     </script>
-
-
-
-
-
-
 	</body>
-	
-	
 	</html>
