@@ -1,0 +1,183 @@
+ body{
+				       color:white; 
+                       background-color:white;				   
+			              background-size:cover;
+                            				
+					   }
+					  
+					   
+					   
+					   
+					   
+	   
+	             ul {    
+				         margin:0px;
+                         margin-left:11px;						 
+						padding:0px;       
+						list-style:none;  
+			           position:fixed;
+				        
+					
+                          						
+						}					
+         ul li {
+	            
+				
+				text-align:left;                  
+				font-size:25px;
+				font-family:times new roman;
+		
+			
+				
+				}
+		     
+
+         ul li a{
+                 text-decoration:none;  
+                 color:black;
+                 display:block; 
+				
+                				 
+                }
+
+        ul li a:hover {               
+                 background-color:green; 
+                    }				 
+
+          ul li ul li{
+                 display: none;
+		
+    
+				 }
+				 
+	ul li:hover ul li{
+                            display:block;
+                             				
+                      }		
+
+        			.footer{
+
+					 position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+					}					
+						
+						
+						.fa {
+    padding: 5px;
+    font-size: 20px;
+    width: 40px;
+    text-align: center;
+    text-decoration: none;
+    
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+    opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+	
+}
+
+/* Twitter */
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+	
+} 
+						
+					.fa-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.fa-youtube {
+  background: #bb0000;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}	
+	
+        
+    
+ 
+ 
+      .button {
+     background:none;
+     color:inherit;
+     border:none; 
+     padding:0!important;
+     font: inherit;
+     /*border is optional*/
+     /*border-bottom:1px solid #444; */
+     cursor: pointer;
+	 color:black;
+	 overflow:hidden;
+}
+   .button:hover{
+   
+        background-color:green;
+   }
+    
+ul.nav.navbar-nav{
+            position:sticky;
+		
+			}
+
+	
+	#wrap {
+    width: 100%;
+	height:100%;
+}
+
+#floatleft {
+     
+    float:left; 
+    width:25%;
+      height:100%;	
+	 
+   
+}
+
+#floatright {
+       position:absolute;
+	   width:80%;
+     right: 0;
+    top:0;
+    bottom: 0;
+      border-left:4px solid black;
+	  margin-top:52px;
+	  margin-bottom:30px;
+	  overflow-y:auto;
+
+}
+
+ #vl {
+       width: 10px;
+      position: absolute;
+    top:0;
+    bottom:0;
+	left:-3px;
+    cursor: w-resize;
+} 
+
+
