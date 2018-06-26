@@ -1,10 +1,11 @@
 
 				function fileSelect(myFile){
                        
-					   
+					                  
 									for(var i=0;i<myFile.files.length;i++)
-									{										
-	                          var file = myFile.files[i];  
+									{		
+                                           								
+	                          var file =myFile.files[i];  
                                     
                                         
                                   // load the data 
