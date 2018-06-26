@@ -30,7 +30,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	<script  src="https://d3js.org/d3.v4.min.js"></script>
+	<script  src="http://d3js.org/d3.v4.min.js"></script>
+	<script src="http://d3js.org/queue.v1.min.js"></script>
 	
 <script src="jquery.min.js"></script>
 <script src="jquery-ui.js"></script>
@@ -51,8 +52,20 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
+    $("#clr").click(function(){
+        $("#chart3").empty();
+    });
+});
+
+$(document).ready(function(){
     $("#inp").click(function(){
         $("#chart2").hide(2000);
+		$("#charts").show();
+    });
+});
+$(document).ready(function(){
+    $("#inp").click(function(){
+        $("#chart3").hide(2000);
 		$("#charts").show();
     });
 });
@@ -65,16 +78,32 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
+    $("#cur").click(function(){
+        $("#chart3").hide(2000);
+		$("#chart2").show();
+    });
+});
+
+
+$(document).ready(function(){
+    $("#inp1").click(function(){
+        $("#charts").hide(2000);
+		$("#chart3").show();
+    });
+});
+$(document).ready(function(){
+    $("#inp1").click(function(){
+        $("#chart2").hide(2000);
+		$("#chart3").show();
+    });
+});
+
+$(document).ready(function(){
 $("#cur").click(function(){
     $("#in").click();
 });
 });
 
-$(document).ready(function(){
-$("#inp1").click(function(){
-    $("#ref").click();
-});
-});
 </script>
 
 </head>
@@ -130,7 +159,7 @@ $("#inp1").click(function(){
 <div id="floatright" >
 <div id="vl"></div>
   
-      <div id="charts"></div><div id="chart2"></div>
+      <div id="charts"></div><div id="chart2"></div><div id="chart3"></div>
     <script type="text/javascript" src="script1.js"></script>
 	<script type="text/javascript" src="script2.js"></script>
 	<script  src="script3.js"></script>
