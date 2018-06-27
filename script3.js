@@ -1,14 +1,15 @@
 	                  
-                                function updateFile()
-								{								
-	
+                 
   var a=["cg.1.tsv","cg.2.tsv","cg.3.tsv","cg.4.tsv","cg.5.tsv","cg.6.tsv","cg.7.tsv","cg.8.tsv","cg.9.tsv","cg.10.tsv","cg.11.tsv","cg.12.tsv"];
   
-                             for(var i=0; i<a.length;i++)
-							 {
-	                                 var file=a[i];
-	                       
-	
+  
+                      
+                      var i = 0;
+
+                   document.getElementById("inp1").onclick = function() {
+                                    if( i < a.length) {
+                                    var file = a[i++];		             
+					
 	
 	d3.tsv("Data/"+file, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
 	                                          function where we pass the data from the file*/
@@ -17,6 +18,15 @@
 					var width=500;
 					   var height=280;
 					   
+					
+
+
+					if ($('#chart3 svg').length === 4){  
+ $('#chart3 svg:first').remove();
+					 }
+					 
+			                     
+					
 	        var svg = d3.select("#chart3").append("svg")
 	
     .attr("width", width)
@@ -161,3 +171,7 @@ labels.each(function(d, i) {
 								}
 					
 								}
+								
+								
+								
+						

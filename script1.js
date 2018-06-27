@@ -88,7 +88,6 @@
 					   .attr("transform", outerArc.centroid(d))
                     .style("text-anchor", "middle")
                     .style("fill", "black")
-				
                     .attr("class", "on")
                     .text(d.data.MPI);
 					   })

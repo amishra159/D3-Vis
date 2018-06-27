@@ -1,23 +1,28 @@
 
-				function fileSelect(myFile){
-                       
-					                  
-									for(var i=0;i<myFile.files.length;i++)
-									{		
-                                           								
-	                          var file =myFile.files[i];  
+                                            var input = document.getElementById('in');
+
+                                   input.onchange = function(e) {
+                                     var files = e.target.files; // File list
+                                                for (var i = files.length-4; i < files.length; ++i) {
+		
+                                                            var fname = files[i].name; 
                                     
-                                        
+										  
                                   // load the data 
 				
-	d3.tsv("Data/"+file.name, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
+	d3.tsv("Data/"+fname, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
 	                                          function where we pass the data from the file*/
 					
 					
 					var width=500;
 					   var height=280;
 					   
-					   
+			if ($('#chart3 svg').length < 4){  
+ $('#chart3 svg:first').show();
+ $('#chart3 svg:second').show();
+ $('#chart3 svg:third').show();
+					 }
+										  
 	
   
 	        var svg = d3.select("#chart2").append("svg")
@@ -57,7 +62,7 @@
         .attr("text-anchor", "middle")  
         .style("font-size", "16px") 
         .style("text-decoration", "underline")
-		 .text(file.name);
+		 .text(fname);
 			 
 
 				
@@ -164,5 +169,6 @@ labels.each(function(d, i) {
    });
    
 						}
-				}
+											}
+				
 			
