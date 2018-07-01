@@ -46,13 +46,13 @@
 
           ul li ul li{
                  display: none;
-		
+		        
     
 				 }
 				 
 	ul li:hover ul li{
                             display:block;
-                             				
+                             ;				
                       }		
 
         			.footer{
@@ -150,13 +150,12 @@ ul.nav.navbar-nav{
 }
 
 #floatleft {
-     
+    
     float:left; 
     width:25%;
-      height:100%;	
-	 
-   
+    
 }
+
 
 #floatright {
        position:absolute;
@@ -179,5 +178,35 @@ ul.nav.navbar-nav{
 	left:-3px;
     cursor: w-resize;
 } 
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 4px;
+  shape-rendering: crisp;
+}
+
+.bar {
+	stroke-width:4px;
+	 margin-left:20px;
+	
+}
+
+
+svg1 text.label {
+  fill:white;
+  font-size: 25px;  
+  text-anchor: middle;
+  
+}
+
+.legend {
+    font-family: times new roman;
+    font-size:20px;
+
+	
+	
+
+
 
 
