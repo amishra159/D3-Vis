@@ -30,7 +30,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	<script  src="https://d3js.org/d3.v4.min.js"></script>
+	<script  src="http://d3js.org/d3.v4.min.js"></script>
 	<script src="http://d3js.org/queue.v1.min.js"></script>
 	
 <script src="jquery.min.js"></script>
@@ -58,6 +58,12 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
+    $("#clr").click(function(){
+        $("#chart4").empty();
+    });
+});
+
+$(document).ready(function(){
     $("#inp").click(function(){
         $("#chart2").hide(2000);
 		$("#charts").show();
@@ -66,6 +72,12 @@ $(document).ready(function(){
 $(document).ready(function(){
     $("#inp").click(function(){
         $("#chart3").hide(2000);
+		$("#charts").show();
+    });
+});
+$(document).ready(function(){
+    $("#inp").click(function(){
+        $("#chart4").hide(2000);
 		$("#charts").show();
     });
 });
@@ -83,6 +95,12 @@ $(document).ready(function(){
 		$("#chart2").show();
     });
 });
+$(document).ready(function(){
+    $("#cur").click(function(){
+        $("#chart4").hide(2000);
+		$("#chart2").show();
+    });
+});
 
 
 $(document).ready(function(){
@@ -97,12 +115,46 @@ $(document).ready(function(){
 		$("#chart3").show();
     });
 });
+$(document).ready(function(){
+    $("#inp1").click(function(){
+        $("#chart4").hide(2000);
+		$("#chart3").show();
+    });
+});
+
+
+$(document).ready(function(){
+    $("#agr").click(function(){
+        $("#charts").hide(2000);
+		$("#chart4").show();
+    });
+});
+$(document).ready(function(){
+    $("#agr").click(function(){
+        $("#chart2").hide(2000);
+		$("#chart4").show();
+    });
+});
+$(document).ready(function(){
+    $("#agr").click(function(){
+        $("#chart3").hide(2000);
+		$("#chart4").show();
+    });
+});
+
+
+
 
 $(document).ready(function(){
 $("#cur").click(function(){
     $("#in").click();
 });
 });
+
+
+
+							
+							
 
 </script>
 
@@ -130,7 +182,7 @@ $("#cur").click(function(){
 	<li><a>View</a>                           <!-- Adding View Option-->
 	<ul>                  	<!--  Adding the Sub Menu for view Option-->
 	<li><button id="clr" class="button">Clean</button></li>          <!-- adds the Load sub option-->
-	<li><input type="file" style="display:none" id="in" webkitdirectory directory multiple allowdirs /><button id="cur" class="button">Current</button></li>
+	<li><input type="file" style="display:none" id="in" webkitdirectory directory multiple  /><button id="cur" class="button">Current</button></li>
 	<li><button id="inp1" class="button">Refresh</button></li>       <!-- adds the Refresh sub option-->
 	<li><button id="agr" class="button">Aggregate</button></li>
 	<li><a>Zoom In</a></li>      <!-- adds the Zoom In sub option-->
@@ -153,17 +205,24 @@ $("#cur").click(function(){
 	  </div>
 	  
 <div id="wrap">
-    <div  id="floatleft">
-	      
-	</div>
+<div  id="floatleft">
+    <div  id="floatleft1"> </div><div  id="floatleft2"></div><div  id="floatleft3"> </div><div  id="floatleft4"></div>	
+	
+	<script type="text/javascript" src="script1.js"></script>
+	<script type="text/javascript" src="script2.js"></script>
+	<script type="text/javascript" src="script3.js"></script>
+	<script type="text/javascript" src="script4.js"></script>
+	 </div>
 	
 <div id="floatright" >
 <div id="vl"></div>
   
-      <div id="charts"></div><div id="chart2"></div><div id="chart3"></div>
+      <div id="charts"></div><div id="chart2"></div><div id="chart3"></div><div id="chart4"></div>
     <script type="text/javascript" src="script1.js"></script>
 	<script type="text/javascript" src="script2.js"></script>
 	<script type="text/javascript" src="script3.js"></script>
+	<script type="text/javascript" src="script4.js"></script>
+	
 	</div>
 	
 </div>
