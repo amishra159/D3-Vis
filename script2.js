@@ -1,27 +1,36 @@
 
-                                            var input = document.getElementById('in');
+            					 
+								
+								 
+							var input = document.getElementById('in');
+
+
 
                                    input.onchange = function(e) {
+
                                      var files = e.target.files; // File list
+
                                                 for (var i = files.length-4; i < files.length; ++i) {
+
 		
-                                                            var fname = files[i].name; 
-                                    
-										  
+
+                                                            var name = files[i].name; 
+                                                            
+						                                              console.log(name);
                                   // load the data 
 				
-	d3.tsv("Data/"+fname, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
+	d3.tsv("Data/"+name, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
 	                                          function where we pass the data from the file*/
 					
 					
 					var width=500;
 					   var height=280;
 					   
-			if ($('#chart3 svg').length < 4){  
+	/*if ($('#chart2 svg').length < 4){ 
  $('#chart3 svg:first').show();
  $('#chart3 svg:second').show();
  $('#chart3 svg:third').show();
-					 }
+					 }*/
 										  
 	
   
@@ -57,12 +66,12 @@
 	    .outerRadius(radius * 1.1);
 		
 		
-		  svg.append("text")
+		 /* svg.append("text")
         .attr("transform","translate(0,135)")
         .attr("text-anchor", "middle")  
         .style("font-size", "16px") 
         .style("text-decoration", "underline")
-		 .text(fname);
+		 .text(name);*/
 			 
 
 				
@@ -74,25 +83,32 @@
                        .data(pie(data))          /* the function pie(data) takes the data from the file and creates an object of that data as an Array*/
                        .enter().append("g")     /*If the data elements are more than the DOM elements we call the enter to update the data */
                        .attr("class", "arc");
-          var text;
+          var div=d3.select("#floatleft2").append("div");
 		   
             arc.append("path")                      /* Adds the Path for the arc*/
 			
                .attr("d", path)                      /*adds the data to the path*/
-			   .attr("fill", function(d,i) { return color(i); })  /*the path is filled with the color by the data being pass
+			   .attr("fill", function(d,i) { return color(i); });  /*the path is filled with the color by the data being pass
 			                                                        to the color function and each data correspinds to different color*/
-		        
+		        svg.selectAll(".arc")
+			       .data(pie(data))
 				 .on("mouseenter", function(d){
-				     text =arc.append("text")
-					   .attr("transform", outerArc.centroid(d))
-                    .style("text-anchor", "middle")
-                    .style("fill", "black")
-				
-                    .attr("class", "on")
-                    .text(d.data.MPI);
-					   })
+	                     div.transition()		
+                .duration(500)		
+                .style("opacity", .9);		
+            div	.html(d.data.Call + "<br/>"  + d.data.MPI  )
+                .style("color","black")	
+                 .style("margin","50px")				 
+                .style("background-color","lightsteelblue")
+                 .style("font-size","20px")	
+                 .style("font-family","times new roman")
+                 .style("text-align","center")
+                  .style("width","100px")				  
+            })					
 				 .on("mouseout", function(d) {
-                   text.remove();
+                    div.transition()		
+                .duration(100)		
+                .style("opacity", 0);	
         });
 
 				 
@@ -168,7 +184,10 @@ labels.each(function(d, i) {
 
    });
    
-						}
-											}
-				
+												
+					
+								
+								   
+						 }
+								   }	 
 			

@@ -1,6 +1,6 @@
 
 	                      var element = document.createElement('div');
-                   element.innerHTML = '<input type="file" id="in" accept=".tsv" >';
+                   element.innerHTML = '<input type="file" id="in" accept=".tsv" multiple>';
                       var fileInput = element.firstChild;
 					  
 					  
@@ -75,24 +75,34 @@
                        .data(pie(data))          /* the function pie(data) takes the data from the file and creates an object of that data as an Array*/
                        .enter().append("g")     /*If the data elements are more than the DOM elements we call the enter to update the data */
                        .attr("class", "arc");
-          var text;
-		   
+         var div=d3.select("#floatleft1").append("div");
+		  
             arc.append("path")                      /* Adds the Path for the arc*/
 			
                .attr("d", path)                      /*adds the data to the path*/
-			   .attr("fill", function(d,i) { return color(i); })  /*the path is filled with the color by the data being pass
+			   .attr("fill", function(d,i) { return color(i); });  /*the path is filled with the color by the data being pass
 			                                                        to the color function and each data correspinds to different color*/
-		        
+		      
+			   svg.selectAll(".arc")
+			       .data(pie(data))
 				 .on("mouseenter", function(d){
-				     text =arc.append("text")
-					   .attr("transform", outerArc.centroid(d))
-                    .style("text-anchor", "middle")
-                    .style("fill", "black")
-                    .attr("class", "on")
-                    .text(d.data.MPI);
-					   })
+	                     div.transition()		
+                .duration(500)		
+                .style("opacity", .9);		
+            div	.html(d.data.Call + "<br/>"  + d.data.MPI+ "<br/>" + file.name)
+                .style("color","black")	
+                 .style("margin","50px")				 
+                .style("background-color","lightsteelblue")
+                 .style("font-size","20px")	
+                 .style("font-family","times new roman")
+                 .style("text-align","center")
+                  .style("width","100px")				  
+               
+            })					
 				 .on("mouseout", function(d) {
-                   text.remove();
+                    div.transition()		
+                .duration(100)		
+                .style("opacity", 0);	
         });
 
 				 
