@@ -1,14 +1,26 @@
 	                  
+					  
+					  
+					
                  
-  var a=["cg.1.tsv","cg.2.tsv","cg.3.tsv","cg.4.tsv","cg.5.tsv","cg.6.tsv","cg.7.tsv","cg.8.tsv","cg.9.tsv","cg.10.tsv","cg.11.tsv","cg.12.tsv"];
-  
-  
-                      
-                      var i = 0;
+  var input = document.getElementById('ref');
+				
+                                      var i=0;
 
-                   document.getElementById("inp1").onclick = function() {
-                                    if( i < a.length) {
-                                    var file = a[i++];		             
+
+                                  input.onchange = function(e){
+
+                                    var files = e.target.files; // File list
+   console.log(files);	
+                      
+					                
+                     
+      
+                  // document.getElementById("ref").onchange = function() {
+                                   if( i < files.length) {
+                                    var file = files.item(i).name;
+								              ++i;
+                               								
 					
 	
 	d3.tsv("Data/"+file, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
@@ -73,7 +85,7 @@
                        .data(pie(data))          /* the function pie(data) takes the data from the file and creates an object of that data as an Array*/
                        .enter().append("g")     /*If the data elements are more than the DOM elements we call the enter to update the data */
                        .attr("class", "arc");
-          var div=d3.select("#floatleft3").append("div");
+          var div=d3.select("#floatleft").append("div");
 		   
             arc.append("path")                      /* Adds the Path for the arc*/
 			
@@ -179,8 +191,9 @@ labels.each(function(d, i) {
 
 								}
 					
-								}
+							
+								  
 								
+				  }
 								
-								
-						
+									  

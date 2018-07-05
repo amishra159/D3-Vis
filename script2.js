@@ -1,22 +1,23 @@
 
             					 
-								
-								 
-							var input = document.getElementById('in');
+								                                       
+					var input = document.getElementById('in');
+				
 
+                                             
 
+                                  input.onchange = function(e){
+									  
 
-                                   input.onchange = function(e) {
+                                    var files = e.target.files; // File list*/
+									                  console.log(files);
 
-                                     var files = e.target.files; // File list
-
-                                                for (var i = files.length-4; i < files.length; ++i) {
-
-		
-
-                                                            var name = files[i].name; 
-                                                            
-						                                              console.log(name);
+                                              for (var i=files.length-3; i<files.length; ++i) {
+													
+													
+                                                            var name = files.item(i).name; 
+                                                            console.log(name);
+						                                           
                                   // load the data 
 				
 	d3.tsv("Data/"+name, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
@@ -66,7 +67,7 @@
 	    .outerRadius(radius * 1.1);
 		
 		
-		 /* svg.append("text")
+		/* svg.append("text")
         .attr("transform","translate(0,135)")
         .attr("text-anchor", "middle")  
         .style("font-size", "16px") 
@@ -83,7 +84,7 @@
                        .data(pie(data))          /* the function pie(data) takes the data from the file and creates an object of that data as an Array*/
                        .enter().append("g")     /*If the data elements are more than the DOM elements we call the enter to update the data */
                        .attr("class", "arc");
-          var div=d3.select("#floatleft2").append("div");
+          var div=d3.select("#floatleft").append("div");
 		   
             arc.append("path")                      /* Adds the Path for the arc*/
 			
@@ -187,7 +188,8 @@ labels.each(function(d, i) {
 												
 					
 								
-								   
 						 }
-								   }	 
-			
+								  
+								  }
+								 
+								  

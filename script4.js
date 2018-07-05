@@ -42,7 +42,7 @@ var svg = d3.select("#chart4").append("svg")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 		  
-		  var div = d3.select("#floatleft4").append("div")	
+		  var div = d3.select("#floatleft").append("div")	
     .attr("class", "tooltip")				
     .style("opacity", 0);
 
@@ -140,7 +140,7 @@ d3.tsv("Data/" +file.name, function(error, data) {
                  .style("font-family","times new roman")
                  .style("text-align","center")
                   .style("width","100px")				  
-               .style("left", (d3.event.floatleft4 -100) + "px")		
+               .style("left", (d3.event.floatleft -100) + "px")		
                 .style("top", (d3.event.pageY +40) + "px");
             })					
         .on("mouseout", function(d) {		

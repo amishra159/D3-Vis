@@ -1,6 +1,6 @@
 
 	                      var element = document.createElement('div');
-                   element.innerHTML = '<input type="file" id="in" accept=".tsv" multiple>';
+                   element.innerHTML = '<input type="file" id="in" accept=".tsv" >';
                       var fileInput = element.firstChild;
 					  
 					  
@@ -28,6 +28,9 @@
       if ($('#charts svg').length === 4) {
         $('#charts svg:first').remove()
       }
+	  
+	
+	  
 	        var svg = d3.select("#charts").append("svg")
 	
     .attr("width", width)
@@ -75,7 +78,7 @@
                        .data(pie(data))          /* the function pie(data) takes the data from the file and creates an object of that data as an Array*/
                        .enter().append("g")     /*If the data elements are more than the DOM elements we call the enter to update the data */
                        .attr("class", "arc");
-         var div=d3.select("#floatleft1").append("div");
+         var div=d3.select("#floatleft").append("div");
 		  
             arc.append("path")                      /* Adds the Path for the arc*/
 			
@@ -86,10 +89,12 @@
 			   svg.selectAll(".arc")
 			       .data(pie(data))
 				 .on("mouseenter", function(d){
-	                     div.transition()		
-                .duration(500)		
-                .style("opacity", .9);		
+			
+	                     div.transition()	
+               .duration(500) 
+                .style("opacity", .9);	
             div	.html(d.data.Call + "<br/>"  + d.data.MPI+ "<br/>" + file.name)
+			    
                 .style("color","black")	
                  .style("margin","50px")				 
                 .style("background-color","lightsteelblue")
@@ -100,12 +105,15 @@
                
             })					
 				 .on("mouseout", function(d) {
-                    div.transition()		
-                .duration(100)		
-                .style("opacity", 0);	
+                    div.transition()  
+		             .duration(100)
+				
+                     	.style("opacity", 0);		
+           
         });
-
-				 
+                        
+						
+					
 		        
 		       
 			 
