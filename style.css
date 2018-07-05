@@ -150,10 +150,14 @@ ul.nav.navbar-nav{
 }
 
 #floatleft {
+	    
     
-    float:left; 
-    width:25%;
-    
+   position: absolute; left: 30px; top:240px;
+    width:20%;
+
+  
+
+	
 }
 
 
@@ -178,6 +182,10 @@ ul.nav.navbar-nav{
 	left:-3px;
     cursor: w-resize;
 } 
+
+
+ 
+
 
 .line {
   fill: none;
