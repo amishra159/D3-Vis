@@ -41,7 +41,7 @@
                 }
 
         ul li a:hover {               
-                 background-color:green; 
+               /*  background-color:green; */
                     }				 
 
           ul li ul li{
@@ -135,7 +135,7 @@
 }
    .button:hover{
    
-        background-color:green;
+      /*  background-color:green;*/
    }
     
 ul.nav.navbar-nav{
