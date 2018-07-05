@@ -1,7 +1,4 @@
-
-            					 
-								                                       
-					var input = document.getElementById('in');
+var input = document.getElementById('in');
 				
 
                                              
@@ -67,12 +64,12 @@
 	    .outerRadius(radius * 1.1);
 		
 		
-		/* svg.append("text")
+		 svg.append("text")
         .attr("transform","translate(0,135)")
         .attr("text-anchor", "middle")  
         .style("font-size", "16px") 
         .style("text-decoration", "underline")
-		 .text(name);*/
+		 .text(name);
 			 
 
 				
@@ -93,7 +90,7 @@
 			                                                        to the color function and each data correspinds to different color*/
 		        svg.selectAll(".arc")
 			       .data(pie(data))
-				 .on("mouseenter", function(d){
+				 .on("click", function(d){
 	                     div.transition()		
                 .duration(500)		
                 .style("opacity", .9);		
@@ -192,4 +189,3 @@ labels.each(function(d, i) {
 								  
 								  }
 								 
-								  

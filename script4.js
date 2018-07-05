@@ -128,7 +128,7 @@ d3.tsv("Data/" +file.name, function(error, data) {
         .attr("r", 5)		
         .attr("cx", function(d) { return x(d.label); })		 
         .attr("cy", function(d) { return y(d.Time); })		
-        .on("mouseover", function(d) {		
+        .on("click", function(d) {		
             div.transition()		
                 .duration(500)		
                 .style("opacity", .9);		

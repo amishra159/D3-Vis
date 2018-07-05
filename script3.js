@@ -12,9 +12,7 @@
 
                                     var files = e.target.files; // File list
    console.log(files);	
-                      
-					                
-                     
+                    
       
                   // document.getElementById("ref").onchange = function() {
                                    if( i < files.length) {
@@ -95,7 +93,7 @@
 		        
 				 svg.selectAll(".arc")
 			       .data(pie(data))
-				 .on("mouseenter", function(d){
+				 .on("click", function(d){
 	                     div.transition()		
                 .duration(200)		
                 .style("opacity", .9);		

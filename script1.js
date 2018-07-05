@@ -88,7 +88,7 @@
 		      
 			   svg.selectAll(".arc")
 			       .data(pie(data))
-				 .on("mouseenter", function(d){
+				 .on("click", function(d){
 			
 	                     div.transition()	
                .duration(500) 
