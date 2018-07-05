@@ -30,7 +30,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	<script  src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+</script>
+
+	
+	<script  src="http://d3js.org/d3.v4.min.js"></script>
 	<script src="http://d3js.org/queue.v1.min.js"></script>
 	
 <script src="jquery.min.js"></script>
@@ -151,7 +155,11 @@ $("#cur").click(function(){
 });
 });
 
-
+$(document).ready(function(){
+$("#inp1").click(function(){
+    $("#ref").click();
+});
+});
 
 							
 							
@@ -160,7 +168,7 @@ $("#cur").click(function(){
 
 </head>
 <body>
-       
+      
 
                 <!--for adding list in the page-->
 <nav class="navbar navbar-inverse">
@@ -182,8 +190,8 @@ $("#cur").click(function(){
 	<li><a>View</a>                           <!-- Adding View Option-->
 	<ul>                  	<!--  Adding the Sub Menu for view Option-->
 	<li><button id="clr" class="button">Clean</button></li>          <!-- adds the Load sub option-->
-	<li><input type="file" style="display:none" id="in" webkitdirectory directory multiple  /><button id="cur" class="button">Current</button></li>
-	<li><button id="inp1" class="button">Refresh</button></li>       <!-- adds the Refresh sub option-->
+	<li><input type="file" style="display:none" id="in" multiple webkitdirectory/><button id="cur" class="button">Current</button></li>
+	<li><input type="file" style="display:none" id="ref" multiple webkitdirectory/><button id="inp1" class="button">Refresh</button></li>       <!-- adds the Refresh sub option-->
 	<li><button id="agr" class="button">Aggregate</button></li>
 	<li><a>Zoom In</a></li>      <!-- adds the Zoom In sub option-->
 	<li><a>Zoom Out</a></li>      <!-- adds the Zoom Out sub option-->
@@ -194,7 +202,7 @@ $("#cur").click(function(){
 	</div>
 	</nav>
       
-	  
+	 
 	  <div class="footer">
 	  <a href="#" class="fa fa-facebook"></a>
 <a href="#" class="fa fa-twitter"></a>
@@ -206,7 +214,7 @@ $("#cur").click(function(){
 	  
 <div id="wrap">
 <div  id="floatleft">
-    <div  id="floatleft1"> </div><div  id="floatleft2"></div><div  id="floatleft3"> </div><div  id="floatleft4"></div>	
+   
 	
 	<script type="text/javascript" src="script1.js"></script>
 	<script type="text/javascript" src="script2.js"></script>
