@@ -1,16 +1,13 @@
 
 	                      var element = document.createElement('div');
-                   element.innerHTML = '<input type="file" id="in" accept=".tsv" >';
-                      var fileInput = element.firstChild;
-					  
-					  
-	
-
+                   element.innerHTML = '<input type="file" id="in" accept=".tsv"  >';
+                      var fileInp = element.firstChild;
+					
                         var fileSelect = document.getElementById("inp");
             
-					   fileInput.addEventListener('change', function() { // wait for file selection
+					   fileInp.addEventListener('change', function() { // wait for file selection
                             
-								var file =fileInput.files[0];
+								var file =fileInp.files[0];
 								  
 								
 								   if (file.name.match(/\.(txt|tsv)$/)) {
@@ -93,7 +90,7 @@
 	                     div.transition()	
                .duration(500) 
                 .style("opacity", .9);	
-            div	.html(d.data.Call + "<br/>"  + d.data.MPI+ "<br/>" + file.name)
+            div	.html("Label:" + d.data.Call + "<br/>" + "Site:" + d.data.Site + "<br/>"+  "MPI:" + d.data.MPI+ "<br/>" + "Time:" + d.data.Time+ "<br/>"+ "App:" + d.data.App + "<br/>" + "FileName:" + file.name )
 			    
                 .style("color","black")	
                  .style("margin","50px")				 
@@ -101,13 +98,12 @@
                  .style("font-size","20px")	
                  .style("font-family","times new roman")
                  .style("text-align","center")
-                  .style("width","100px")				  
+                  .style("width","200px")				  
                
             })					
 				 .on("mouseout", function(d) {
                     div.transition()  
-		             .duration(100)
-				
+				.duration(10000)
                      	.style("opacity", 0);		
            
         });
@@ -198,5 +194,5 @@ labels.each(function(d, i) {
 			
 			
 			fileSelect.addEventListener("click", function () {  // wait for click on "select a file" button
-    fileInput.click();
+    fileInp.click();
 });
