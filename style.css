@@ -151,13 +151,13 @@ ul.nav.navbar-nav{
 
 #floatleft {
 	    
-    
-   position: absolute; left: 30px; top:240px;
-    width:20%;
+    float:left;
+   position: absolute; top:240px;
+   width:20%;
+     bottom: 0;
+	  margin-bottom:30px;
+	overflow-y:scroll;
 
-  
-
-	
 }
 
 
@@ -176,12 +176,17 @@ ul.nav.navbar-nav{
 
  #vl {
        width: 10px;
+	   height:100%;
       position: absolute;
     top:0;
     bottom:0;
-	left:-3px;
+	left:-5px;
     cursor: w-resize;
+
+	
+
 } 
+
 
 
  
@@ -213,7 +218,7 @@ svg1 text.label {
     font-size:20px;
 
 	
-	
+}
 
 
 

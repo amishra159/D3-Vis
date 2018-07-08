@@ -14,12 +14,7 @@
        <!--In ul li:hover ul li{}, the sub menu will get displayed as on hovering the menu bar options.	   -->	   
    
    
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-<meta name="HandheldFriendly" content="true">
+  
    
    
 
@@ -34,8 +29,7 @@
 </script>
 
 	
-	<script  src="https://d3js.org/d3.v4.min.js"></script>
-	<script src="http://d3js.org/queue.v1.min.js"></script>
+     <script src="https://d3js.org/d3.v4.min.js"></script>
 	
 <script src="jquery.min.js"></script>
 <script src="jquery-ui.js"></script>
@@ -147,14 +141,6 @@ $(document).ready(function(){
 });
 
 
-
-
-$(document).ready(function(){
-$("#cur").click(function(){
-    $("#in").click();
-});
-});
-
 $(document).ready(function(){
 $("#inp1").click(function(){
     $("#ref").click();
@@ -190,8 +176,8 @@ $("#inp1").click(function(){
 	<li><a>View</a>                           <!-- Adding View Option-->
 	<ul>                  	<!--  Adding the Sub Menu for view Option-->
 	<li><button id="clr" class="button">Clean</button></li>          <!-- adds the Load sub option-->
-	<li><input type="file" style="display:none" id="in" multiple webkitdirectory/><button id="cur" class="button">Current</button></li>
-	<li><input type="file" style="display:none" id="ref" multiple webkitdirectory/><button id="inp1" class="button">Refresh</button></li>       <!-- adds the Refresh sub option-->
+	<li><button id="cur" class="button" >Current</button></li>
+	<li><input type="file" id="ref" style="display:none"  webkitdirectory multiple /><button id="inp1" class="button">Refresh</button></li>       <!-- adds the Refresh sub option-->
 	<li><button id="agr" class="button">Aggregate</button></li>
 	<li><a>Zoom In</a></li>      <!-- adds the Zoom In sub option-->
 	<li><a>Zoom Out</a></li>      <!-- adds the Zoom Out sub option-->
@@ -214,8 +200,6 @@ $("#inp1").click(function(){
 	  
 <div id="wrap">
 <div  id="floatleft">
-   
-	
 	<script type="text/javascript" src="script1.js"></script>
 	<script type="text/javascript" src="script2.js"></script>
 	<script type="text/javascript" src="script3.js"></script>
@@ -269,5 +253,6 @@ $("#inp1").click(function(){
 
 
     </script>
+	
 	</body>
 	</html>

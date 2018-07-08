@@ -1,22 +1,22 @@
-var input = document.getElementById('in');
-				
 
-                                             
+                                var element1 = document.createElement('div');
+                   element1.innerHTML = '<input type="file" id="in" accept=".tsv" webkitdirectory multiple >';
+                      var fileInput = element1.firstChild;
+                                                   
+   var fileSelect1 = document.getElementById('cur');
 
-                                  input.onchange = function(e){
-									  
-
-                                    var files = e.target.files; // File list*/
-									                  console.log(files);
-
-                                              for (var i=files.length-3; i<files.length; ++i) {
-													
-													
-                                                            var name = files.item(i).name; 
-                                                            console.log(name);
-						                                           
-                                  // load the data 
-				
+fileInput.addEventListener('change', function (evnt) {
+  var fileList = [];
+  for (var i = 0,j = fileInput.files.length; i<j; i++) {
+  fileList.push(fileInput.files[i]);
+  console.log(fileList);
+  }
+  fileList.forEach(function (file, index) {
+    var name=file.name;
+    console.log(name);
+														 
+								
+			
 	d3.tsv("Data/"+name, function(data) {    /* To get Data from external file we add cg.2.tsv and calls an 
 	                                          function where we pass the data from the file*/
 					
@@ -24,13 +24,11 @@ var input = document.getElementById('in');
 					var width=500;
 					   var height=280;
 					   
-	/*if ($('#chart2 svg').length < 4){ 
- $('#chart3 svg:first').show();
- $('#chart3 svg:second').show();
- $('#chart3 svg:third').show();
-					 }*/
-										  
-	
+	if ($('#chart2 svg').length === 4 ){  
+ $('#chart2 svg:first').remove();
+					 }
+		
+					  
   
 	        var svg = d3.select("#chart2").append("svg")
 	
@@ -94,18 +92,18 @@ var input = document.getElementById('in');
 	                     div.transition()		
                 .duration(500)		
                 .style("opacity", .9);		
-            div	.html(d.data.Call + "<br/>"  + d.data.MPI  )
+           div	.html("Label:" + d.data.Call + "<br/>" + "Site:" + d.data.Site + "<br/>"+  "MPI:" + d.data.MPI+ "<br/>" + "Time:" + d.data.Time+ "<br/>"+ "App:" + d.data.App + "<br/>" + "FileName:" + name )
                 .style("color","black")	
                  .style("margin","50px")				 
                 .style("background-color","lightsteelblue")
                  .style("font-size","20px")	
                  .style("font-family","times new roman")
                  .style("text-align","center")
-                  .style("width","100px")				  
+                  .style("width","200px")				  
             })					
 				 .on("mouseout", function(d) {
                     div.transition()		
-                .duration(100)		
+                .duration(10000)		
                 .style("opacity", 0);	
         });
 
@@ -180,12 +178,14 @@ labels.each(function(d, i) {
 	
       .style("stroke-width", "1px");
 
-   });
-   
-												
-					
-								
-						 }
+   });	
+										 
+										 });
+										 
+								 });
+						
 								  
-								  }
-								 
+							fileSelect1.addEventListener("click", function () {  // wait for click on "select a file" button
+    fileInput.click();
+});
+
